@@ -4,6 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
+    "build-test": "tsc",
     "serve": "npx nodemon --exec npx ts-node src/index.ts"
     },
   "keywords": [],
