@@ -1,0 +1,30 @@
+.NavPro2Container{
+    width: 100%;
+    background-color:white;
+    box-sizing: border-box;
+}
+
+.nav{
+    /* border: 0.02px solid #414347; */
+    /* padding: 13px; */
+    gap:-4px;
+    color:#969BA6;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.active {
+    color: rgb(116, 116, 240);
+    text-decoration:underline;
+    padding: 1rem;
+  }
+.default{
+    color:#787b81;
+    text-decoration: none;
+    padding: 1rem;
+}
+
+.nav>p:hover{
+    color:white;
+    cursor: pointer;
+}
