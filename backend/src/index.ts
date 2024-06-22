@@ -30,19 +30,49 @@
 
 
 
-import express, { Express, Request, Response } from "express";
-// import dotenv from "dotenv";
+// import express, { Express, Request, Response } from "express";
+// // import dotenv from "dotenv";
 
-// dotenv.config();
+// // dotenv.config();
 
-const app: Express = express();
-const port = process.env.PORT || 4000;
+// const app: Express = express();
+// const port = process.env.PORT || 4000;
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+// app.get("/", (req: Request, res: Response) => {
+//   res.send("Express + TypeScript Server");
+// });
+
+// app.listen(port, () => {
+//   console.log(`[server]: Server is running at http://localhost:${port}`);
+// });
+
+import express, { Request, Response } from "express";
+import cors from "cors";
+import connect  from "./config/dbConnect";
+import userRouter from "./features/users/user.router";
+// import taskRouter from "./features/tasks/task.router";
+// import projectRouter from "./features/projects/project.router";
+import { authmiddleware } from "./features/Middlewares/authmiddleware";
+
+const PORT = process.env.PORT || 4000;
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use('/user', userRouter);
+// app.use('/project', authmiddleware, projectRouter);
+// app.use('/task', authmiddleware, taskRouter);
+
+app.get("/", async (req: Request, res: Response) => {
+    res.send('Backend is running successfully!');
 });
 
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
+// listen
+connect().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Listening on port: http://localhost:${PORT}`);
+    });
+}).catch((error: Error) => {
+    console.error('Failed to connect to the database:', error);
 });
-
