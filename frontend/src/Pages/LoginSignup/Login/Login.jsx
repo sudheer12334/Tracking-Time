@@ -6,7 +6,8 @@ import { loginAPI } from '../../../Redux/Auth/auth.action';
 import { loginFailedToast, loginSuccessToast, serverErrorToast } from '../../../Controllers/login.controller';
 
 const Login = () => {
-  const { token, loading } = useSelector(store => store.auth);
+  const { token, loading, error } = useSelector(store => store.auth);
+  console.log(token, 'state')
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();

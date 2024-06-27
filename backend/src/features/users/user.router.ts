@@ -12,7 +12,6 @@ interface UserRequest extends Request {
 }
 
 app.post('/signup', async (req: Request, res: Response) => {
-    console.log("request received");
     const { email,password } = req.body;
     try {
         logInfo(`Signup request received for email: ${email}`);
