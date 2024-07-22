@@ -20,6 +20,7 @@ import { useSignupUserMutation } from "../../../Redux/services/auth";
 
 const SignupPage = () => {
   const [signupUser, { isLoading }] = useSignupUserMutation();
+  console.log(useSignupUserMutation(),"zing");
   const { token, loading } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const toast = useToast();

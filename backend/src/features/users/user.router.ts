@@ -36,20 +36,31 @@ app.post('/signup', async (req: Request, res: Response) => {
         res.status(500).send((e as Error).message);
     }
 });
-
-app.post('/login', async (req: UserRequest, res: Response) => {
+app.post('/login', async (req: Request, res: Response) => {
     const { email, password } = req.body;
     try {
+        // if(email==undefined||password==undefined) throw new Error();
+        logInfo(`Login request received for email: ${email}`);
+
         const user = await User.findOne({ email, password });
 
         if (!user) {
-            return res.status(401).send('Authentication failed');
+            logInfo(`Authentication failed for email: ${email}`);
+            return res.status(401).send({
+                messageKey: "AUTH_LOGIN_FAILED"
+            });
         }
-
         const token = Buffer.from(`${user.id}:${user.email}`).toString('base64');
-        return res.send({ token });
+        logInfo(`User authenticated successfully with email: ${email}`);
+        return res.status(200).json({
+            token,
+            messageKey: "AUTH_LOGIN_SUCCESS"
+        });
     } catch (e) {
-        res.status(401).send('Incorrect credentials');
+        logError('Error during login process', e as Error);
+        res.status(500).send({
+            messageKey:"AUTH_LOGIN_ERROR"
+        });
     }
 });
 
