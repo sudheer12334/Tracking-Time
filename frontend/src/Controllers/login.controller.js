@@ -1,27 +1,26 @@
-export const loginSuccessToast = (toast) => {
+export const loginSuccessToast = (toast,responseMessage) => {
     toast({
         title: 'Login Successful.',
-        description: "Welcome back!",
+        description: responseMessage,
         status: 'success',
         duration: 2000,
         isClosable: true,
     });
 }
-
-export const loginFailedToast = (toast) => {
+export const loginFailedToast = (toast,responseMessage) => {
     toast({
         title: 'Login failed.',
-        description: "Invalid credentials!",
+        description: responseMessage,
         status: 'error',
         duration: 2000,
         isClosable: true,
     });
 }
 
-export const serverErrorToast = (toast) => {
+export const serverErrorToast = (toast,responseMessage) => {
     toast({
-        title: 'Something went wrong!',
-        description: "Try after some time.",
+        title: 'Uh! Something went wrong!',
+        description: responseMessage,
         status: 'error',
         duration: 2000,
         isClosable: true,
